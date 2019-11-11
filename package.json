@@ -4,12 +4,10 @@
   "description": "Midterm Project 401",
   "main": "index.js",
   "scripts": {
-    "start": "node list/index.js",
-    "lint": "eslint '**/*.js'",
-    "test": "node_modules/.bin/jest --coverage --verbose",
-    "test-watch": "node_modules/.bin/jest --watchAll --verbose --coverage",
-    "jsdoc": "node_modules/.bin/jsdoc -c ./docs/config/jsdoc.config.json",
-    "watch": "node_modules/.bin/jest --watchAll --coverage --verbose"
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test-watch": "jest --watchAll",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -26,8 +24,21 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.3",
+
+    "jest": "^23.6.0",
+    "bcrypt": "^3.0.2",
+    "cors": "^2.8.4",
+    "debug": "^4.1.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "^1.9.0",
+    "require-directory": "^2.1.1",
+    "supertest": "^3.3.0"
+
     "jest": "^24.9.0",
     "pg": "^7.12.1"
+
   },
   "devDependencies": {
     "jsdoc": "^3.6.3"

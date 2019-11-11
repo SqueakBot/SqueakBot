@@ -2,6 +2,9 @@
 
 Midterm Project 401
 
+### run
+`nodemon index.js`
+
 ## Authors: Adrian Huebner, Julie Erlemeier, Alistair Blake, David Zheng, Avrey Brown
 
 ## User Stories
