@@ -6,12 +6,11 @@ Midterm Project 401
 
 ## User Stories
 
-1. As a user at Code Fellows, I want a device to remind me what code challenges are available, so I can improve my skills. 
+1. As a user at Code Fellows, I want a device to remind me what code challenges are available, so I can improve my skills.
 2. As a developer of this app, I want to create a database, so that it can hold all the code challenges.
-3. As a designer of the product, I want to make the product appealing, so the user can have an enjoyable experience. 
-4. As a developer of this app, I want the device to have the ability to play music, so the user can have that option while coding. 
-5. As an experienced developer, I want to check in to see the current code challenges in today’s world, so that I can improve my skills. 
-
+3. As a designer of the product, I want to make the product appealing, so the user can have an enjoyable experience.
+4. As a developer of this app, I want the device to have the ability to play music, so the user can have that option while coding.
+5. As an experienced developer, I want to check in to see the current code challenges in today’s world, so that I can improve my skills.
 
 ## Database Entity-Relationship-Diagram
 
