@@ -7,9 +7,7 @@
     "start": "node index.js",
     "watch": "nodemon index.js",
     "test-watch": "jest --watchAll",
-    "test": "jest --coverage",
-    "dbOn": "mkdir -p ./db && mongod --dbpath ./db",
-    "dbOff": "killall mongod"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -33,9 +31,6 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.4.0",
-    "mongodb-memory-server": "^2.7.3",
-    "mongoose": "^5.3.13",
-    "mongoose-schema-jsonschema": "^1.1.15",
     "morgan": "^1.9.0",
     "require-directory": "^2.1.1",
     "supertest": "^3.3.0"

@@ -13,6 +13,13 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+///////////////
+app.get('/question', (req,res,next) => {
+  res.send(JSON.stringify('squeeeeeeeak!'))
+});
+
+///////////////
+
 // if server is already running
 module.exports = {
   server: app,
