@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS test(
 
 -- 1
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
-  '',
-  '',
-  ''
+  'write a function that deletes N nodes after M nodes of a linked list',
+  'linked list',
+  'main problem is to maintain proper link between nodes, make sure all corner cases'
 );
 
 -- 2
@@ -113,14 +113,14 @@ INSERT INTO challenges (challenges, data_type, hint) VALUES (
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
   'validate a palindrome',
   'stack/queue',
-  ''
+  'implanet counters, make sure that every letter is lowercased'
 );
 
 -- 13
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
-  'implament a stack using queues',
+  'implement a stack using queues',
   'stack/queue',
-  ''
+  'you can do this with two queues or one single queue'
 );
 
 -- 14
@@ -176,21 +176,21 @@ INSERT INTO challenges (challenges, data_type, hint) VALUES (
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
   'write a function that compute the sum of all the elements in a binary search tree',
   'binary search tree',
-  ''
+  'use recursion to do this'
 );
 
 -- 22
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
   'write a function that will compute the depth of the binary search tree',
   'binary search tree',
-  ''
+  'the best solution is to do a level order traversal'
 );
 
 -- 23
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
   'write a function that will compare two binary trees and determine if they are structurally identical',
   'binary search tree',
-  ''
+  'both trees are going to have to be traversed simultaneously, while doing that data and children from each tree will need to be compared'
 );
 
 -- 24
@@ -237,7 +237,7 @@ INSERT INTO challenges (challenges, data_type, hint) VALUES (
 
 -- 30
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
-  'write a historam function that prints the count of each letter in a string',
+  'write a histogram function that prints the count of each letter in a string',
   'hash table',
   ''
 );
@@ -251,7 +251,7 @@ INSERT INTO challenges (challenges, data_type, hint) VALUES (
 
 -- 32
 INSERT INTO challenges (challenges, data_type, hint) VALUES (
-  'implanent a linked list using your hashtable',
+  'write a function that implements a hashtable using a linked list',
   'hash table',
   ''
 );
@@ -260,192 +260,192 @@ INSERT INTO challenges (challenges, data_type, hint) VALUES (
 
 -- 1
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'what values that are assigned to N and M, and a linked list',
+  'linked list with the values that were after M removed'
 );
 
 -- 2
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'linked list',
+  'return all the values of the linked list in it'
 );
 
 -- 3
 INSERT INTO test (input, output) VALUES (
-  'Linked list',
-  'Array of all the values from the linked list'
+  'linked list',
+  'array of all the values from the linked list'
 );
 
 -- 4
 INSERT INTO test (input, output) VALUES (
-  'Linked list',
-  'The value of the first node, but if list is empty it returns null'
+  'linked list',
+  'the value of the first node, but if list is empty it returns null'
 );
 
 -- 5
 INSERT INTO test (input, output) VALUES (
-  'Two linked list',
-  'One linked list that only has the values that are the same from the inputed two linked lists'
+  'two linked list',
+  'one linked list that only has the values that are the same from the inputed two linked lists'
 );
 
 -- 6
 INSERT INTO test (input, output) VALUES (
-  'Two linked list',
-  'One linked list that contains all of the values from the original two linked lists, if there is any repeating values than that value will only show up once'
+  'two linked list',
+  'one linked list that contains all of the values from the original two linked lists, if there is any repeating values than that value will only show up once'
 );
 
 -- 7
 INSERT INTO test (input, output) VALUES (
-  'Linked list',
-  'Reversed linked list'
+  'linked list',
+  'reversed linked list'
 );
 
 -- 8
 INSERT INTO test (input, output) VALUES (
-  'Linked list',
-  'Linked list with consective duplicate values removed'
+  'linked list',
+  'linked list with consective duplicate values removed'
 );
 
 -- 9
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'functions that are waiting to be called in a queue',
+  'whatever those functions do'
 );
 
 -- 10
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'string that has either matching braces or no matching braces',
+  'true if the string has matching braces, false if the string does not have matching braces'
 );
 
 -- 11
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'stack',
+  'queue that uses an array to rotate'
 );
 
 -- 12
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'a string that either contains a palindrome or not',
+  'true if the string is a palindrome, false if the string is not a palindrome'
 );
 
 -- 13
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'seperate node values',
+  'stack'
 );
 
 -- 14
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary tree',
+  'return the value of that tree'
 );
 
 -- 15
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary tree',
+  'return the value of that tree'
 );
 
 -- 16
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary tree',
+  'number that is the amount of leaves that, that tree has'
 );
 
 -- 17
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary tree',
+  'number that is the amount of edges that, that tree has'
 );
 
 -- 18
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'tree',
+  'return the number of max childs that a node has'
 );
 
 -- 19
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary tree',
+  'return true if nth child has been removed, return false if nth child has not been removed'
 );
 
 -- 20
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary search tree',
+  'return true if that value is within the tree, return false if that value is not within the tree'
 );
 
 -- 21
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary search tree',
+  'return the value of all the nodes in the tree summed together'
 );
 
 -- 22
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary search tree',
+  'return the value of the depth of the tree'
 );
 
 -- 23
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary search tree',
+  'return true if the trees are structurally identical, return false if the trees are not structurally identical'
 );
 
 -- 24
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'two binary search trees',
+  'returns one binary search tree, that is a combination of original two binary search trees, if there are repeats it returns only one of them'
 );
 
 -- 25
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'two binary search trees',
+  'returns one binary search tree, that is only the nodes that are the same from each of the original trees'
 );
 
 -- 26
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'binary search tree',
+  'true if the binary search tree is valid, false if the binary search tree is invalid'
 );
 
 -- 27
 INSERT INTO test (input, output) VALUES (
-  'Binary search tree',
-  'Linked List of all the nodes that were in the binary search tree, bonus if they are sorted in order'
+  'binary search tree',
+  'linked list of all the nodes that were in the binary search tree, bonus if they are sorted in order'
 );
 
 -- 28
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'string',
+  'number that is the value of that string'
 );
 
 -- 29
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'string',
+  'however you want to return the first letter that duplicates in that string'
 );
 
 -- 30
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'string',
+  'however you want to return how many times each letter occurs in a string'
 );
 
 -- 31
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'two seperate hashtables',
+  'one hashtable that contains the all the values from the inputed two hashtables'
 );
 
 -- 32
 INSERT INTO test (input, output) VALUES (
-  '',
-  ''
+  'linked list',
+  'a hashtable containing the values from a linked list'
 );
