@@ -24,13 +24,23 @@ const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err  => console.log(err));
 
-app.get('/questions/challenges', getAllChallenges);
+app.get('/questions/challenges', getOneChallenge);
 
-function getAllChallenges(request, response){
-  let SQL = `SELECT * FROM challenges`;
+// function getAllChallenges(request, response){
+//   let SQL = `SELECT challenges, data_type FROM challenges`;
+//   client.query(SQL)
+//     .then(results => {
+//       response.send(JSON.stringify(results));
+//     })
+//     .catch(error => response.send(error));
+// }
+
+function getOneChallenge(request, response){
+  let SQL = `SELECT challenges, data_type FROM challenges`;
   client.query(SQL)
-    .then(results => {
-      response.send(JSON.stringify(results));
+    .then(result => {
+      const randomIndex = Math.floor(Math.random() * result.rows.length);
+      response.send(JSON.stringify(result.rows[randomIndex]));
     })
     .catch(error => response.send(error));
 }
