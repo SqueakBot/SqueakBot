@@ -26,15 +26,6 @@ client.on('error', err  => console.log(err));
 
 app.get('/questions/challenges', getOneChallenge);
 
-// function getAllChallenges(request, response){
-//   let SQL = `SELECT challenges, data_type FROM challenges`;
-//   client.query(SQL)
-//     .then(results => {
-//       response.send(JSON.stringify(results));
-//     })
-//     .catch(error => response.send(error));
-// }
-
 function getOneChallenge(request, response){
   let SQL = `SELECT challenges, data_type FROM challenges`;
   client.query(SQL)
@@ -44,6 +35,12 @@ function getOneChallenge(request, response){
     })
     .catch(error => response.send(error));
 }
+
+//// savedChallenges
+
+//// validateChallenge (checks to see if user has already saved the challenge)
+
+//// getTestsById
 
 ///////////////
 // app.get('/question', (req,res,next) => {
