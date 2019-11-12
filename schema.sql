@@ -1,31 +1,31 @@
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS challenges;
 DROP TABLE IF EXISTS saved_challenges;
 DROP TABLE IF EXISTS challenges_test;
 DROP TABLE IF EXISTS test;
 
-CREATE TABLE IF NOT EXISTS user(
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255),
   email VARCHAR(255),
   password VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS challenges(
+CREATE TABLE challenges (
   id SERIAL PRIMARY KEY,
   challenges VARCHAR,
   data_type VARCHAR(255),
   hint VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS saved_challenges(
-  user_id VARCHAR REFERENCES user(id),
-  challenge_id VARCHAR REFERENCES challenges(id),
+CREATE TABLE saved_challenges (
+  users_id INTEGER REFERENCES users(id),
+  challenge_id INTEGER REFERENCES challenges(id),
   completed VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS test(
-  challenge_id VARCHAR REFERENCES challenges(id),
+CREATE TABLE test (
+  challenge_id INTEGER REFERENCES challenges(id),
   input VARCHAR,
   output VARCHAR
 );
