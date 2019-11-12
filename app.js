@@ -31,7 +31,8 @@ function getOneChallenge(request, response){
   client.query(SQL)
     .then(result => {
       const randomIndex = Math.floor(Math.random() * result.rows.length);
-      response.send(JSON.stringify(result.rows[randomIndex]));
+      //gets one question from the db
+      response.send(JSON.stringify(Object.values(result.rows[randomIndex])));
     })
     .catch(error => response.send(error));
 }
