@@ -1,11 +1,21 @@
 # SqueakBot
+Javascript 401 Midterm Project - Novemeber 2019
 
-Midterm Project 401
+--------------------------------------------------
 
+### We are deployed on _____
+
+--------------------------------------------------
 ### run
 `nodemon index.js`
 
-## Authors: Adrian Huebner, Julie Erlemeier, Alistair Blake, David Zheng, Avrey Brown
+--------------------------------------------------
+
+## Squeakbot
+
+***[Explain your app, should be at least a paragraph. What does it do? Why should I use? Sell your product!]***
+
+Authors: Adrian Huebner, Julie Erlemeier, Alistair Blake, David Zheng, Avrey Brown
 
 ## User Stories
 
@@ -15,9 +25,56 @@ Midterm Project 401
 4. As a developer of this app, I want the device to have the ability to play music, so the user can have that option while coding.
 5. As an experienced developer, I want to check in to see the current code challenges in today’s world, so that I can improve my skills.
 
+--------------------------------------------------
+
+## Tools Used
+
+VS Code
+SSH
+Google Voice Kit with Raspberry pi zero
+AIY Project App (Android): allows developer to connect to raspberry pi through a wireless network connection by providing an IP address. 
+Google CloudSpeech API
+
+- NodeJS
+- ExpressJS
+- PostgresQL database
+- 
+---------------------------------
+
+## Getting Started
+
+Clone this repository to your local machine.
+```
+<!-- $ git clone https://github.com/YourRepo/YourProject.git -->
+```
+Once downloaded, you can either use Visual Studio 2017 (or greater) to build the web application.
+```
+cd YourRepo/YourProject
+`npm i`
+```
+Install all dependencies needed for the project.
+```
+PostgresQL Database
+* CREATE DATABASE <name of database>
+* `psql -f <schema.sql> -d <database name>`
+<!-- * explain how to use the database * -->
+```
+Create a .env file
+* Define a PORT
+* Add your Database URL: DATABASE_URL=postgresql://localhost:5432/<databasename>
+* For more details see section titled: 
+```
+cd YourRepo/YourProject
+`npm start ` OR `nodemon`
+```
+---------------------------
+
 ## Database Entity-Relationship-Diagram
 
 ![RED-for-SqueakBot](./assets/DB_for_SqueakBot.png)
+---------------------------
+
+## SQL DATABASE USAGE
 
 ### User Table
 
@@ -72,3 +129,25 @@ Midterm Project 401
   - type: String
 - output
   - type: String
+
+---------------------------------
+
+## Usage
+***[Provide some images of your app that shows how it can be used with brief description as title]***
+
+### Overview of Recent Posts
+![Overview of Recent Posts](https://via.placeholder.com/500x250)
+
+### Creating a Post
+![Post Creation](https://via.placeholder.com/500x250)
+
+### Enriching a Post
+![Enriching Post](https://via.placeholder.com/500x250)
+
+### Viewing Post Details
+![Details of Post](https://via.placeholder.com/500x250)
+
+---------------------------
+## Data Flow (Frontend, Backend, REST API)
+***[Add a clean and clear explanation of what the data flow is. Walk me through it.]***
+![Data Flow Diagram](/assets/img/Flowchart.png)
