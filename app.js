@@ -18,8 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 const client = new pg.Client(process.env.DATABASE_URL);
-client.connect();
 client.on('error', err  => console.log(err));
+client.on('end', () => console.log('ended'));
+
+
+app.get('/', (request, response) => {
+  response.send('welcome');
+});
 
 ///////// Dealing with Auth Users Routes //////////
 
@@ -36,11 +41,14 @@ app.get('/questions/challenges', getOneChallenge);
 
 ////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
+  client.connect();
   let SQL = `SELECT challenges, data_type FROM challenges`;
   client.query(SQL)
     .then(result => {
       const randomIndex = Math.floor(Math.random() * result.rows.length);
-      response.send(JSON.stringify(result.rows[randomIndex]));
+      //gets one question from the db
+      response.send(JSON.stringify(Object.values(result.rows[randomIndex])));
+      // client.end();
     })
     .catch(error => response.send(error));
 }
