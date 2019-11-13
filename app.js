@@ -21,18 +21,25 @@ app.use(express.urlencoded({extended:true}));
 // /////////
 
 const client = new pg.Client(process.env.DATABASE_URL);
-client.connect();
 client.on('error', err  => console.log(err));
+client.on('end', () => console.log('ended'));
+
+
+app.get('/', (request, response) => {
+  response.send('welcome');
+});
 
 app.get('/questions/challenges', getOneChallenge);
 
 function getOneChallenge(request, response){
+  client.connect();
   let SQL = `SELECT challenges, data_type FROM challenges`;
   client.query(SQL)
     .then(result => {
       const randomIndex = Math.floor(Math.random() * result.rows.length);
       //gets one question from the db
       response.send(JSON.stringify(Object.values(result.rows[randomIndex])));
+      // client.end();
     })
     .catch(error => response.send(error));
 }
@@ -47,7 +54,6 @@ function getOneChallenge(request, response){
 // app.get('/question', (req,res,next) => {
 //   res.send(JSON.stringify('squeeeeeeeak!'));
 // });
-
 
 ///////////////
 
