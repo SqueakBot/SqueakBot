@@ -3,11 +3,10 @@
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
-const cookiesParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const bycrpt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
-const port = process.env.PORT;
 
 // app.level.mw
 const app = express();
@@ -26,18 +25,53 @@ app.get('/', (request, response) => {
   response.send('welcome');
 });
 
+////// Functions that deal with Auth Users //////
+function hashingPassword(password){
+  return new Promise((resolve, reject) => {
+    bycrpt.hash(password, 10 ,(error, hash) => {
+      error ? reject(error) : resolve(hash);
+    });
+  });
+}
+
+function createUser(user){
+  return client.query(`INSERT INTO users (
+    username,
+    email,
+    password
+  ) VALUES (
+    $1, $2, $3);`,
+  [
+    user.username, user.email, user.password,
+  ]);
+}
+
+function createUserToken(user){
+  let tokenData = {
+    id: user.id,
+  };
+  return jwt.sign(tokenData, process.env.SECRET || 'changeit' );
+}
+
 ///////// Dealing with Auth Users Routes //////////
-
 app.post('/signup', (request, response, next) => {
-
+  client.connect();
+  hashingPassword(request.body.password)
+    .then(password => {
+      request.body.password = password;
+      createUser(request.body)
+        .then(() => {
+          const token = createUserToken(request.body);
+          response.send(token);
+        })
+        .catch((error) => console.error(error));
+    });
 });
 
-
-
-////// Functions that deal with Auth Users ///////
-
-////// Routes for Challenges /////////
-app.get('/questions/challenges', getOneChallenge);
+app.post('/signin', (request, response, next) => {
+  client.connect();
+  
+});
 
 ////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
@@ -60,6 +94,10 @@ function getOneChallenge(request, response){
 //// validateChallenge (checks to see if user has already saved the challenge)
 
 //// getTestsById
+
+////// Routes for Challenges /////////
+app.get('/questions/challenges', getOneChallenge);
+
 
 // if server is already running
 module.exports = {
