@@ -1,11 +1,10 @@
 'use strict';
 
-// prepare the express app
 const express = require('express');
 const cors = require('cors');
-// const morgan = require('morgan');
-// const superagent = require('superagent');
 const pg = require('pg');
+const cookiesParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 const port = process.env.PORT;
@@ -18,8 +17,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-// /////////
-
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err  => console.log(err));
 client.on('end', () => console.log('ended'));
@@ -29,8 +26,20 @@ app.get('/', (request, response) => {
   response.send('welcome');
 });
 
+///////// Dealing with Auth Users Routes //////////
+
+app.post('/signup', (request, response, next) => {
+
+});
+
+
+
+////// Functions that deal with Auth Users ///////
+
+////// Routes for Challenges /////////
 app.get('/questions/challenges', getOneChallenge);
 
+////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
   client.connect();
   let SQL = `SELECT challenges, data_type FROM challenges`;
@@ -44,18 +53,13 @@ function getOneChallenge(request, response){
     .catch(error => response.send(error));
 }
 
+//// getHintforChallenge
+
 //// savedChallenges
 
 //// validateChallenge (checks to see if user has already saved the challenge)
 
 //// getTestsById
-
-///////////////
-// app.get('/question', (req,res,next) => {
-//   res.send(JSON.stringify('squeeeeeeeak!'));
-// });
-
-///////////////
 
 // if server is already running
 module.exports = {
