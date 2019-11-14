@@ -85,8 +85,8 @@ function getOneChallenge(request, response){
         .then(result => {
           //gets one question from the db
           console.log(result);
-          response.send(JSON.stringify(Object.values(result.rows[0])));
-          console.log();
+          response.send(JSON.stringify(result.rows[0].challenges));
+          console.log(JSON.stringify((result.rows[0].challenges)));
           // client.end();
         });
     })
