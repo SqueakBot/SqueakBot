@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
+let idUsed;
+
 // app.level.mw
 const app = express();
 app.use(cors());
@@ -19,6 +21,7 @@ app.use(express.urlencoded({extended:true}));
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err  => console.log(err));
 client.on('end', () => console.log('ended'));
+client.connect();
 
 
 app.get('/', (request, response) => {
@@ -55,7 +58,6 @@ function createUserToken(user){
 
 ///////// Dealing with Auth Users Routes //////////
 app.post('/signup', (request, response, next) => {
-  client.connect();
   hashingPassword(request.body.password)
     .then(password => {
       request.body.password = password;
@@ -69,31 +71,18 @@ app.post('/signup', (request, response, next) => {
 });
 
 app.post('/signin', (request, response, next) => {
-  client.connect();
   
 });
 
 ////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
-  client.connect();
-  let SQL = `SELECT challenges, data_type FROM challenges`;
-  client.query(SQL)
+  client.query(`SELECT id, challenges, data_type FROM challenges WHERE NOT id = $1;`, [idUsed])
     .then(result => {
       const randomIndex = Math.floor(Math.random() * result.rows.length);
+      idUsed = result.rows[randomIndex].id;
       //gets one question from the db
       response.send(JSON.stringify(Object.values(result.rows[randomIndex])));
       // client.end();
-    })
-    .catch(error => response.send(error));
-}
-
-function getNextChallenge(request,response){
-  client.connect();
-  let SQL = `SELECT challenges, data_type FROM challenges`;
-  client.query(SQL)
-    .then(newResult => {
-      const randomIndex = Math.floor(Math.random() * newResult.rows.length);
-      response.send(JSON.stringify(Object.values(newResult.rows[randomIndex])));
     })
     .catch(error => response.send(error));
 }
@@ -108,7 +97,6 @@ function getNextChallenge(request,response){
 
 ////// Routes for Challenges /////////
 app.get('/questions/challenges', getOneChallenge);
-app.get('/newquestion', getNextChallenge);
 
 // if server is already running
 module.exports = {
