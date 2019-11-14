@@ -59,12 +59,16 @@ function createBearToken(request, response) {
   client.query(`SELECT * FROM users`)
     .then(results => {
       if (client.query.includes(request.data.username)) {
-        if (//check password) {
-          //do something
+        for(let i = 0; i < results.length; i++) {
+          if(i.username === request.data.username) {
+            if (i.password === request.data.password) {
+              return createUserToken(i);
+            }
+          }
         }
       }
-    })
-  // we generate token using createBearToekn function
+    });
+  // we generate token using createBearToken function
   //
 }
 
@@ -83,7 +87,8 @@ app.post('/signup', (request, response, next) => {
 });
 
 app.post('/signin', (request, response, next) => {
-  createUserToken()
+  // createUserToken();
+  createBearToken(request);
 });
 
 ////// Functions that deal with Challenges ///////
