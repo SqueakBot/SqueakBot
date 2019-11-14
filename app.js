@@ -77,10 +77,10 @@ function getOneChallenge(request, response){
   client.query(`SELECT * FROM challenges`)
     .then(results => {
       let idUsed = results.rowCount;
-      console.log(idUsed);
+      // console.log(idUsed);
       let randomIndex = Math.floor(Math.random() * results.rows.length) + 1;
       idUsed = randomIndex;
-      console.log(idUsed, randomIndex);
+      // console.log(idUsed, randomIndex);
       client.query(`SELECT id, challenges, data_type FROM challenges WHERE id = $1;`, [idUsed])
         .then(result => {
           //gets one question from the db
