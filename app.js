@@ -8,8 +8,6 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
-let idUsed;
-
 // app.level.mw
 const app = express();
 app.use(cors());
@@ -76,13 +74,21 @@ app.post('/signin', (request, response, next) => {
 
 ////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
-  client.query(`SELECT id, challenges, data_type FROM challenges WHERE NOT id = $1;`, [idUsed])
-    .then(result => {
-      const randomIndex = Math.floor(Math.random() * result.rows.length);
-      idUsed = result.rows[randomIndex].id;
-      //gets one question from the db
-      response.send(JSON.stringify(Object.values(result.rows[randomIndex])));
-      // client.end();
+  client.query(`SELECT * FROM challenges`)
+    .then(results => {
+      let idUsed = results.rowCount;
+      console.log(idUsed);
+      let randomIndex = Math.floor(Math.random() * results.rows.length) + 1;
+      idUsed = randomIndex;
+      console.log(idUsed, randomIndex);
+      client.query(`SELECT id, challenges, data_type FROM challenges WHERE id = $1;`, [idUsed])
+        .then(result => {
+          //gets one question from the db
+          console.log(result);
+          response.send(JSON.stringify(Object.values(result.rows[0])));
+          console.log();
+          // client.end();
+        });
     })
     .catch(error => response.send(error));
 }
