@@ -87,6 +87,17 @@ function getOneChallenge(request, response){
     .catch(error => response.send(error));
 }
 
+function getNextChallenge(request,response){
+  client.connect();
+  let SQL = `SELECT challenges, data_type FROM challenges`;
+  client.query(SQL)
+    .then(newResult => {
+      const randomIndex = Math.floor(Math.random() * newResult.rows.length);
+      response.send(JSON.stringify(Object.values(newResult.rows[randomIndex])));
+    })
+    .catch(error => response.send(error));
+}
+
 //// getHintforChallenge
 
 //// savedChallenges
@@ -97,7 +108,7 @@ function getOneChallenge(request, response){
 
 ////// Routes for Challenges /////////
 app.get('/questions/challenges', getOneChallenge);
-
+app.get('/newquestion', getNextChallenge);
 
 // if server is already running
 module.exports = {
