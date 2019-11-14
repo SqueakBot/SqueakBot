@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
+let idUsed;
+
 // app.level.mw
 const app = express();
 app.use(cors());
@@ -36,14 +38,16 @@ function hashingPassword(password){
 }
 
 function createUser(user){
+  user.token = createUserToken(user);
   return client.query(`INSERT INTO users (
     username,
     email,
-    password
+    password,
+    token
   ) VALUES (
-    $1, $2, $3);`,
+    $1, $2, $3, $4);`,
   [
-    user.username, user.email, user.password,
+    user.username, user.email, user.password, user.token,
   ]);
 }
 
@@ -51,7 +55,9 @@ function createUserToken(user){
   let tokenData = {
     id: user.id,
   };
-  return jwt.sign(tokenData, process.env.SECRET || 'changeit' );
+  var token = jwt.sign(tokenData, process.env.SECRET || 'changeit' );
+  user.token = token;
+  return token;
 }
 
 ///////// Dealing with Auth Users Routes //////////
@@ -69,40 +75,54 @@ app.post('/signup', (request, response, next) => {
 });
 
 app.post('/signin', (request, response, next) => {
-  
+  // if (client.query.includes(request.data.username)) {
+  let array = client.query(`SELECT * FROM users`);
+  for(let i = 0; i < array.length; i++) {
+    if(i.username === request.data.username) {
+      if (i.password === request.data.password) {
+        return i.token;
+      }
+    }
+  }
 });
 
 ////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
   client.query(`SELECT * FROM challenges`)
     .then(results => {
-      let idUsed = results.rowCount;
+      idUsed = results.rowCount;
       console.log(idUsed);
       let randomIndex = Math.floor(Math.random() * results.rows.length) + 1;
       idUsed = randomIndex;
-      console.log(idUsed, randomIndex);
+      // console.log(idUsed);
+      console.log(randomIndex);
+      // console.log(idUsed, randomIndex);
       client.query(`SELECT id, challenges, data_type FROM challenges WHERE id = $1;`, [idUsed])
         .then(result => {
           //gets one question from the db
           console.log(result);
           response.send(JSON.stringify(result.rows[0].challenges));
-          console.log(JSON.stringify((result.rows[0].challenges)));
+          // console.log(JSON.stringify((result.rows[0].challenges)));
           // client.end();
         });
     })
     .catch(error => response.send(error));
 }
 
-//// getHintforChallenge
-
-//// savedChallenges
-
-//// validateChallenge (checks to see if user has already saved the challenge)
-
 //// getTestsById
+function getTheTestsforChallenge(request, response){
+  console.log(idUsed);
+  client.query(`SELECT input, output FROM test JOIN challenges ON test.id = challenges.id AND test.id = $1;`, [idUsed])
+    .then(testResults => {
+      console.log(testResults);
+      response.send(JSON.stringify(Object.values(testResults.rows)));
+    })
+    .catch(error => console.log(error));
+}
 
 ////// Routes for Challenges /////////
 app.get('/questions/challenges', getOneChallenge);
+app.get('/test', getTheTestsforChallenge);
 
 // if server is already running
 module.exports = {
