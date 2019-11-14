@@ -54,6 +54,20 @@ function createUserToken(user){
   return jwt.sign(tokenData, process.env.SECRET || 'changeit' );
 }
 
+function createBearToken(request, response) {
+  // if username matches username in database, then we check the password
+  client.query(`SELECT * FROM users`)
+    .then(results => {
+      if (client.query.includes(request.data.username)) {
+        if (//check password) {
+          //do something
+        }
+      }
+    })
+  // we generate token using createBearToekn function
+  //
+}
+
 ///////// Dealing with Auth Users Routes //////////
 app.post('/signup', (request, response, next) => {
   hashingPassword(request.body.password)
@@ -69,7 +83,7 @@ app.post('/signup', (request, response, next) => {
 });
 
 app.post('/signin', (request, response, next) => {
-  
+  createUserToken()
 });
 
 ////// Functions that deal with Challenges ///////
