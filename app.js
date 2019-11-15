@@ -23,11 +23,6 @@ client.on('error', err  => console.log(err));
 client.on('end', () => console.log('ended'));
 client.connect();
 
-
-app.get('/', (request, response) => {
-  response.send('welcome');
-});
-
 ////// Functions that deal with Auth Users //////
 function hashingPassword(password){
   return new Promise((resolve, reject) => {
@@ -37,6 +32,7 @@ function hashingPassword(password){
   });
 }
 
+// creates a new user and saves that to the DB
 function createUser(user){
   user.token = createUserToken(user);
   return client.query(`INSERT INTO users (
@@ -50,14 +46,70 @@ function createUser(user){
     user.username, user.email, user.password, user.token,
   ]);
 }
-
-function createUserToken(user){
+//4
+// fetches a user from the db based on a username
+async function authenticate(userCreds) {
+  //userCreds.username
+  //userCreds.password
+  let SQL = `SELECT * FROM users WHERE username = $1;`;
+  const results = await client.query(SQL, [userCreds.username]);
+  const user = results.rows[0];
+  const isValid = await bycrpt.compare(userCreds.password, user.password);
+  if (isValid) {
+    return createUserToken(user);
+  } else {
+    console.error(err => 'You have an error.');
+  }
+}
+//5
+async function createUserToken(user){
   let tokenData = {
     id: user.id,
   };
-  var token = jwt.sign(tokenData, process.env.SECRET || 'changeit' );
-  user.token = token;
+  var token = await jwt.sign(tokenData, process.env.SECRET || 'changeit' );
   return token;
+}
+//2
+async function authenticateUser(request, response, next){
+  // decide which authentication method
+  let token = null;
+  const [authType, authString] = request.headers.authorization.split(/\s+/);
+  switch(authType.toLowerCase()) {
+
+  // exchanging strings for token
+  case 'basic':
+    token = await authenticateBasic(authString);
+    response.send(token);
+    break;
+  // exchanging token for data;
+  case 'bearer':
+    token = await authenticateBearer(authString);
+    request.token = token;
+    next();
+    break;
+  default:
+    console.log('no header auth error');
+  }
+}
+//3
+// takes our encoded STRING and finds a user and sends back a token
+function authenticateBasic(string){
+  let base64Buffer = Buffer.from(string, 'base64');
+  let bufferString = base64Buffer.toString();
+  let [username, password] = bufferString.split(':');
+  let authorize = {username, password};
+
+  // query a user using the username than validate that user with their password
+  return authenticate(authorize);
+}
+
+async function authenticateBearer(token){
+  const parsedToken = jwt.verify(token, process.env.SECRET);
+
+  let SQL = `SELECT * FROM users WHERE id = $1;`;
+  const results = await client.query(SQL, [parsedToken.id]);
+  const user = results.rows[0];
+  return createUserToken(user);
 }
 
 ///////// Dealing with Auth Users Routes //////////
@@ -73,18 +125,9 @@ app.post('/signup', (request, response, next) => {
         .catch((error) => console.error(error));
     });
 });
+//1
+app.post('/signin', authenticateUser);
 
-app.post('/signin', (request, response, next) => {
-  // if (client.query.includes(request.data.username)) {
-  let array = client.query(`SELECT * FROM users`);
-  for(let i = 0; i < array.length; i++) {
-    if(i.username === request.data.username) {
-      if (i.password === request.data.password) {
-        return i.token;
-      }
-    }
-  }
-});
 
 ////// Functions that deal with Challenges ///////
 function getOneChallenge(request, response){
@@ -94,7 +137,7 @@ function getOneChallenge(request, response){
       console.log(idUsed);
       let randomIndex = Math.floor(Math.random() * results.rows.length) + 1;
       idUsed = randomIndex;
-      // console.log(idUsed);
+      console.log(idUsed);
       console.log(randomIndex);
       // console.log(idUsed, randomIndex);
       client.query(`SELECT id, challenges, data_type FROM challenges WHERE id = $1;`, [idUsed])
@@ -121,8 +164,9 @@ function getTheTestsforChallenge(request, response){
 }
 
 ////// Routes for Challenges /////////
-app.get('/questions/challenges', getOneChallenge);
-app.get('/test', getTheTestsforChallenge);
+app.get('/questions/challenges', authenticateUser, getOneChallenge);
+app.get('/test', authenticateUser, getTheTestsforChallenge);
+
 
 // if server is already running
 module.exports = {
