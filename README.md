@@ -14,6 +14,7 @@ Javascript 401 Midterm Project - Novemeber 2019
 ## Squeakbot
 
 ***[Explain your app, should be at least a paragraph. What does it do? Why should I use? Sell your product!]***
+Squeakbot is a helpful mock interviewer for the phase of your life when you are practicing common whiteboard questions in preparation for job interviews in the tech industry. It uses AI technology and a raspberry pi zero to listen to your request and output a question. When you ask it, "Give me a challenge," it will recieve your request through a microphone on a voice bonnet. Using a Node Server, it pulls a random question from a SQL database and reads it out loud to you through a speaker. 
 
 Authors: Adrian Huebner, Julie Erlemeier, Alistair Blake, David Zheng, Avrey Brown
 
@@ -38,7 +39,17 @@ Google CloudSpeech API
 - NodeJS
 - ExpressJS
 - PostgresQL database
-- 
+- Google Cloud Speech API
+- Hardware
+  * Google Voice Kit
+    * Raspberry pi zero
+    * Voice bonnet
+    * Speaker
+  * Keyboard
+  * Mouse
+  * Monitor
+  * MicroUSB to USB cable
+  
 ---------------------------------
 
 ## Getting Started
@@ -130,24 +141,13 @@ cd YourRepo/YourProject
 - output
   - type: String
 
----------------------------------
-
-## Usage
-***[Provide some images of your app that shows how it can be used with brief description as title]***
-
-### Overview of Recent Posts
-![Overview of Recent Posts](https://via.placeholder.com/500x250)
-
-### Creating a Post
-![Post Creation](https://via.placeholder.com/500x250)
-
-### Enriching a Post
-![Enriching Post](https://via.placeholder.com/500x250)
-
-### Viewing Post Details
-![Details of Post](https://via.placeholder.com/500x250)
-
----------------------------
+--------------------------------------
 ## Data Flow (Frontend, Backend, REST API)
 ***[Add a clean and clear explanation of what the data flow is. Walk me through it.]***
-![Data Flow Diagram](/assets/img/Flowchart.png)
+
+![Data Flow Diagram](./assets/Flowchart.jpg)
+
+![Data Flow Diagram](./assets/Flowchart2.jpg)
+## The Model
+
+![Model For Mouse](./assets/bigBoi.PNG)
