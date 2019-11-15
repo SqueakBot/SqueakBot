@@ -112,6 +112,10 @@ async function authenticateBearer(token){
   return createUserToken(user);
 }
 
+app.get('/', (request, response) => {
+  response.send('welcome');
+});
+
 ///////// Dealing with Auth Users Routes //////////
 app.post('/signup', (request, response, next) => {
   hashingPassword(request.body.password)
