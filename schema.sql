@@ -1,14 +1,13 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS challenges;
-DROP TABLE IF EXISTS saved_challenges;
-DROP TABLE IF EXISTS challenges_test;
 DROP TABLE IF EXISTS test;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255),
   email VARCHAR(255),
-  password VARCHAR(255)
+  password VARCHAR(255),
+  token VARCHAR(255)
 );
 
 CREATE TABLE challenges (
@@ -18,14 +17,8 @@ CREATE TABLE challenges (
   hint VARCHAR
 );
 
-CREATE TABLE saved_challenges (
-  users_id INTEGER REFERENCES users(id),
-  challenge_id INTEGER REFERENCES challenges(id),
-  completed VARCHAR(255)
-);
-
 CREATE TABLE test (
-  challenge_id INTEGER REFERENCES challenges(id),
+  id SERIAL PRIMARY KEY,
   input VARCHAR,
   output VARCHAR
 );
@@ -260,192 +253,192 @@ INSERT INTO challenges (challenges, data_type, hint) VALUES (
 
 -- 1
 INSERT INTO test (input, output) VALUES (
-  'what values that are assigned to N and M, and a linked list',
-  'linked list with the values that were after M removed'
+  'input is what values that are assigned to N and M, and a linked list',
+  'expected output is a linked list with the values that were after M removed'
 );
 
 -- 2
 INSERT INTO test (input, output) VALUES (
-  'linked list',
-  'return all the values of the linked list in it'
+  'input is a linked list',
+  'expected output will return all the values of the linked list'
 );
 
 -- 3
 INSERT INTO test (input, output) VALUES (
-  'linked list',
-  'array of all the values from the linked list'
+  'input is a linked list',
+  'expected output is an array of all the values from the linked list'
 );
 
 -- 4
 INSERT INTO test (input, output) VALUES (
-  'linked list',
-  'the value of the first node, but if list is empty it returns null'
+  'input is a linked list',
+  'expected output will return the value of the first node, but if list is empty it returns null'
 );
 
 -- 5
 INSERT INTO test (input, output) VALUES (
-  'two linked list',
-  'one linked list that only has the values that are the same from the inputed two linked lists'
+  'input is two linked list',
+  'expected output is one linked list that only has the values that are the same from the inputed two linked lists'
 );
 
 -- 6
 INSERT INTO test (input, output) VALUES (
-  'two linked list',
-  'one linked list that contains all of the values from the original two linked lists, if there is any repeating values than that value will only show up once'
+  'input is two linked list',
+  'expected output will be one linked list that contains all of the values from the original two linked lists, if there is any repeating values than that value will only show up once'
 );
 
 -- 7
 INSERT INTO test (input, output) VALUES (
-  'linked list',
-  'reversed linked list'
+  'input is a linked list',
+  'expected output will be that reversed linked list'
 );
 
 -- 8
 INSERT INTO test (input, output) VALUES (
-  'linked list',
-  'linked list with consective duplicate values removed'
+  'input is a linked list',
+  'expected output is a linked list with consective duplicate values removed'
 );
 
 -- 9
 INSERT INTO test (input, output) VALUES (
-  'functions that are waiting to be called in a queue',
-  'whatever those functions do'
+  'input are functions that are waiting to be called in a queue',
+  'expected output is whatever those functions do'
 );
 
 -- 10
 INSERT INTO test (input, output) VALUES (
-  'string that has either matching braces or no matching braces',
-  'true if the string has matching braces, false if the string does not have matching braces'
+  'input is a string that has either matching braces or no matching braces',
+  'expected output will return true if the string has matching braces, or it will return false if the string does not have matching braces'
 );
 
 -- 11
 INSERT INTO test (input, output) VALUES (
-  'stack',
-  'queue that uses an array to rotate'
+  'input is a stack',
+  'expected output will return a queue that uses an array to rotate'
 );
 
 -- 12
 INSERT INTO test (input, output) VALUES (
-  'a string that either contains a palindrome or not',
-  'true if the string is a palindrome, false if the string is not a palindrome'
+  'input is a string that either contains a palindrome or not',
+  'expected output will return true if the string is a palindrome, or it will return false if the string is not a palindrome'
 );
 
 -- 13
 INSERT INTO test (input, output) VALUES (
-  'seperate node values',
-  'stack'
+  'input is a seperate node values',
+  'expected output will be a stack'
 );
 
 -- 14
 INSERT INTO test (input, output) VALUES (
-  'binary tree',
-  'return the value of that tree'
+  'input is a binary tree',
+  'expected output will return the value of that tree'
 );
 
 -- 15
 INSERT INTO test (input, output) VALUES (
-  'binary tree',
-  'return the value of that tree'
+  'input is a binary tree',
+  'expected output will return the value of that tree'
 );
 
 -- 16
 INSERT INTO test (input, output) VALUES (
-  'binary tree',
-  'number that is the amount of leaves that, that tree has'
+  'input is a binary tree',
+  'expected output is a number that is the amount of leaves that, that tree has'
 );
 
 -- 17
 INSERT INTO test (input, output) VALUES (
-  'binary tree',
-  'number that is the amount of edges that, that tree has'
+  'input is a binary tree',
+  'expected output is a number that is the amount of edges that, that tree has'
 );
 
 -- 18
 INSERT INTO test (input, output) VALUES (
-  'tree',
-  'return the number of max childs that a node has'
+  'input is a tree',
+  'expected output will return the number of max childs that a node has'
 );
 
 -- 19
 INSERT INTO test (input, output) VALUES (
-  'binary tree',
-  'return true if nth child has been removed, return false if nth child has not been removed'
+  'input is a binary tree',
+  'expected output will return true if nth child has been removed, or will return false if nth child has not been removed'
 );
 
 -- 20
 INSERT INTO test (input, output) VALUES (
-  'binary search tree',
-  'return true if that value is within the tree, return false if that value is not within the tree'
+  'input is a binary search tree',
+  'expected output will return true if that value is within the tree, or will return false if that value is not within the tree'
 );
 
 -- 21
 INSERT INTO test (input, output) VALUES (
-  'binary search tree',
-  'return the value of all the nodes in the tree summed together'
+  'input is a binary search tree',
+  'expected output will return the value of all the nodes in the tree summed together'
 );
 
 -- 22
 INSERT INTO test (input, output) VALUES (
-  'binary search tree',
-  'return the value of the depth of the tree'
+  'input is a binary search tree',
+  'expected output will return the value of the depth of the tree'
 );
 
 -- 23
 INSERT INTO test (input, output) VALUES (
-  'binary search tree',
-  'return true if the trees are structurally identical, return false if the trees are not structurally identical'
+  'input is a binary search tree',
+  'expected output will return true if the trees are structurally identical, or will return false if the trees are not structurally identical'
 );
 
 -- 24
 INSERT INTO test (input, output) VALUES (
-  'two binary search trees',
-  'returns one binary search tree, that is a combination of original two binary search trees, if there are repeats it returns only one of them'
+  'input is two binary search trees',
+  'expected output returns one binary search tree, that is a combination of original two binary search trees, if there are repeats it returns only one of them'
 );
 
 -- 25
 INSERT INTO test (input, output) VALUES (
-  'two binary search trees',
-  'returns one binary search tree, that is only the nodes that are the same from each of the original trees'
+  'input is two binary search trees',
+  'expected output returns one binary search tree, that is only the nodes that are the same from each of the original trees'
 );
 
 -- 26
 INSERT INTO test (input, output) VALUES (
-  'binary search tree',
-  'true if the binary search tree is valid, false if the binary search tree is invalid'
+  'input is binary search tree',
+  'expected output is true if the binary search tree is valid, or will return false if the binary search tree is invalid'
 );
 
 -- 27
 INSERT INTO test (input, output) VALUES (
-  'binary search tree',
-  'linked list of all the nodes that were in the binary search tree, bonus if they are sorted in order'
+  'input is binary search tree',
+  'expected output is linked list of all the nodes that were in the binary search tree, bonus if they are sorted in order'
 );
 
 -- 28
 INSERT INTO test (input, output) VALUES (
-  'string',
-  'number that is the value of that string'
+  'input is string',
+  'expected output is a number that is the value of that string'
 );
 
 -- 29
 INSERT INTO test (input, output) VALUES (
-  'string',
-  'however you want to return the first letter that duplicates in that string'
+  'input is string',
+  'expected output is however you want to return the first letter that duplicates in that string'
 );
 
 -- 30
 INSERT INTO test (input, output) VALUES (
-  'string',
-  'however you want to return how many times each letter occurs in a string'
+  'input is string',
+  'expected output is however you want to return how many times each letter occurs in a string'
 );
 
 -- 31
 INSERT INTO test (input, output) VALUES (
-  'two seperate hashtables',
-  'one hashtable that contains the all the values from the inputed two hashtables'
+  'input is two seperate hashtables',
+  'expected output is one hashtable that contains the all the values from the inputed two hashtables'
 );
 
 -- 32
 INSERT INTO test (input, output) VALUES (
-  'linked list',
-  'a hashtable containing the values from a linked list'
+  'input is a linked list',
+  'expected output is a hashtable containing the values from a linked list'
 );
