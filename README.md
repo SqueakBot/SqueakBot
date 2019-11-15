@@ -141,24 +141,13 @@ cd YourRepo/YourProject
 - output
   - type: String
 
----------------------------------
-
-## Usage
-***[Provide some images of your app that shows how it can be used with brief description as title]***
-
-### Overview of Recent Posts
-![Overview of Recent Posts](https://via.placeholder.com/500x250)
-
-### Creating a Post
-![Post Creation](https://via.placeholder.com/500x250)
-
-### Enriching a Post
-![Enriching Post](https://via.placeholder.com/500x250)
-
-### Viewing Post Details
-![Details of Post](https://via.placeholder.com/500x250)
-
----------------------------
+--------------------------------------
 ## Data Flow (Frontend, Backend, REST API)
 ***[Add a clean and clear explanation of what the data flow is. Walk me through it.]***
-![Data Flow Diagram](/assets/img/Flowchart.png)
+
+![Data Flow Diagram](./assets/Flowchart.jpg)
+
+![Data Flow Diagram](./assets/Flowchart2.jpg)
+## The Model
+
+![Model For Mouse](./assets/bigBoi.PNG)
