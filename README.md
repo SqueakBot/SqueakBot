@@ -1,9 +1,14 @@
 # SqueakBot
-Javascript 401 Midterm Project - Novemeber 2019
+Javascript 401 Midterm Project - November 2019
 
 --------------------------------------------------
 
-### We are deployed on _____
+### We are deployed on Heroku
+https://squeak-bot.herokuapp.com/
+
+### Github
+https://github.com/SqueakBot/SqueakBot
+https://github.com/SqueakBot/RaspPiPython
 
 --------------------------------------------------
 ### run
@@ -13,8 +18,10 @@ Javascript 401 Midterm Project - Novemeber 2019
 
 ## Squeakbot
 
-***[Explain your app, should be at least a paragraph. What does it do? Why should I use? Sell your product!]***
-Squeakbot is a helpful mock interviewer for the phase of your life when you are practicing common whiteboard questions in preparation for job interviews in the tech industry. It uses AI technology and a raspberry pi zero to listen to your request and output a question. When you ask it, "Give me a challenge," it will recieve your request through a microphone on a voice bonnet. Using a Node Server, it pulls a random question from a SQL database and reads it out loud to you through a speaker. 
+Squeakbot is a helpful mock interviewer for the phase of your life when you are practicing common whiteboard questions 
+in preparation for job interviews in the tech industry. It uses AI technology and a raspberry pi zero to listen to your 
+request and output a question. When you ask it, "Give me a challenge," it will receive your request through a microphone
+on a voice bonnet. Using a Node Server, it pulls a random question from a SQL database and reads it out loud to you through a speaker. 
 
 Authors: Adrian Huebner, Julie Erlemeier, Alistair Blake, David Zheng, Avrey Brown
 
